@@ -28,7 +28,7 @@
         <span class="float">🤖</span> AI 얼굴 종족 테스트
       </h1>
       <p class="text-gray-300 max-w-xl mx-auto">
-        단 한 장의 사진만 업로드하면 <span class="font-semibold">Teachable Machine</span> 모델이 얼굴 특징을 분석해<br class="hidden md:block" />
+        단 한 장의 사진만 업로드하면 <span class="font-semibold">Ayang Face AI-v1-1</span> 모델이 얼굴 특징을 분석해<br class="hidden md:block" />
         당신이 진정한 인간인지, 다른 종족인지 추측해 드립니다.
       </p>
     </header>
@@ -43,7 +43,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 text-indigo-300 mb-2">
             <path d="M12 19V6M5 12l7-7 7 7" />
           </svg>
-          <span class="text-center text-indigo-200">얼굴 사진을 올려놓거나<br />클릭해서 업로드하세요</span>
+          <span class="text-center text-indigo-200">얼굴 사진을 드래그해서 올려놓거나<br />클릭해서 직접 업로드하세요</span>
         </label>
 
         <img id="preview" class="w-64 h-64 object-cover rounded-2xl border-4 border-indigo-500 shadow-xl hidden" alt="Preview" />
@@ -58,7 +58,7 @@
 
     <footer class="mt-10 text-xs text-gray-500 text-center">
       <p>
-        © 2025 <span class="font-semibold">종족테스트</span>. 본 프로젝트는 오픈소스 예제로 자유롭게 포크할 수 있습니다.
+        © 2025 <span class="font-semibold">종족테스트</span>. 본 프로젝트는 jebi0605의 Github에서 Apeache 2.0라이선스로 제공됩니다.또한,이 AI는 인스타그램 aya.ngg8에서 만들어졌습니다.
       </p>
     </footer>
 
@@ -87,13 +87,13 @@
 
         const bars = prediction.map((p) => {
           const percent = (p.probability * 100).toFixed(1);
+          const barWidth = Math.max(p.probability * 100, 0.5);
           return `
             <div class="flex items-center gap-4">
-              <div class="w-24 text-right text-white">${p.className}</div>
-              <div class="flex-1 bg-white/10 rounded-full h-6 overflow-hidden">
-                <div class="h-full bg-indigo-500 text-xs text-white flex items-center justify-end pr-2 rounded-full" style="width: ${percent}%; min-width: 2rem;">
-                  ${percent}%
-                </div>
+              <div class="w-24 text-right text-white shrink-0">${p.className}</div>
+              <div class="flex-1 bg-white/10 rounded-full h-6 overflow-hidden relative">
+                <div class="h-full bg-indigo-500 rounded-full" style="width: ${barWidth}%"></div>
+                <div class="absolute right-2 top-0 bottom-0 flex items-center text-xs text-white">${percent}%</div>
               </div>
             </div>`;
         }).join("");
